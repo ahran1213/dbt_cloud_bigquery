@@ -1,0 +1,21 @@
+version: 2
+
+sources: 
+  - name: bigquery_source
+    schema: staging
+
+    tables:
+      - name: orders
+
+models:
+    - name: transformed_orders
+      description: "order transformed table"
+      columns:
+          - name: order_id
+            description: "Unique order id for every order"
+            tests:
+                - unique
+                - not_null
+      config:
+          materialized: table
+          alias: 'order_report'
